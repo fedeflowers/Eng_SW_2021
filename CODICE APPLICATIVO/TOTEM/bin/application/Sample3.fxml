@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerNoleggio">
+   <top>
+      <Text fx:id="testoModelli" strokeType="OUTSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="5.0" />
+         </BorderPane.margin>
+      </Text>
+   </top>
+   <center>
+      <Button fx:id="button" mnemonicParsing="false" onAction="#show" text="visualizza modelli" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="250.0" right="450.0" top="60.0" />
+         </BorderPane.margin></Button>
+   </center>
+   <bottom>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="insModello">
+                     <HBox.margin>
+                        <Insets left="140.0" top="50.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btnModello" mnemonicParsing="false" onAction="#noleggiaModello" text="Noleggia">
+                     <HBox.margin>
+                        <Insets left="20.0" top="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="50.0" />
+               </BorderPane.margin>
+            </HBox>
+         </center>
+         <bottom>
+            <Text fx:id="postoBici" strokeType="OUTSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="60.0" right="10.0" />
+               </BorderPane.margin>
+            </Text>
+         </bottom>
+         <left>
+            <Button fx:id="back" mnemonicParsing="false" onAction="#back" text="Back" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="30.0" />
+               </BorderPane.margin>
+            </Button>
+         </left>
+      </BorderPane>
+   </bottom>
+</BorderPane>

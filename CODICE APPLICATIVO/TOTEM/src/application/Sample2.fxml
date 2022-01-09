@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerNoleggio">
+   <center>
+      <Button fx:id="controllaRiconsegnaBtn" mnemonicParsing="false" onAction="#controllaRiconsegna" text="Controlla riconsegna" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="90.0" />
+         </BorderPane.margin>
+      </Button>
+   </center>
+   <top>
+      <Button fx:id="Noleggia" mnemonicParsing="false" onAction="#modelliBici" text="Noleggia" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="100.0" />
+         </BorderPane.margin>
+      </Button>
+   </top>
+   <bottom>
+      <Button fx:id="biciDanneggiataBtn" mnemonicParsing="false" onAction="#openBiciDanneggiata" text="Segnala Bici danneggiata" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="100.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+   <left>
+      <Button fx:id="backToLogin" mnemonicParsing="false" onAction="#backToLogin" text="Back" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="50.0" />
+         </BorderPane.margin>
+      </Button>
+   </left>
+</BorderPane>

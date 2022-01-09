@@ -1,0 +1,431 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
+
+-- Started on 2021-03-09 17:45:34
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 200 (class 1259 OID 16806)
+-- Name: Abbonamento; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Abbonamento" (
+    "CodiceUnivoco" character varying NOT NULL,
+    tipo character varying NOT NULL,
+    inizio date,
+    fine date,
+    studente boolean NOT NULL,
+    "ConsegnaTardiva" integer
+);
+
+
+ALTER TABLE public."Abbonamento" OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 16812)
+-- Name: Biciclette; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Biciclette" (
+    "Id" integer NOT NULL,
+    tipo character varying NOT NULL,
+    danno boolean,
+    totem integer,
+    seggiolino boolean
+);
+
+
+ALTER TABLE public."Biciclette" OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 16818)
+-- Name: Impiegati; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Impiegati" (
+    "Nome" character varying NOT NULL,
+    "CodiceImpiegato" character varying NOT NULL,
+    "Password" character varying NOT NULL
+);
+
+
+ALTER TABLE public."Impiegati" OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 16824)
+-- Name: ImpiegatiRitiroBici; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ImpiegatiRitiroBici" (
+    impiegato character varying NOT NULL,
+    bici integer NOT NULL,
+    inizio timestamp with time zone NOT NULL,
+    fine timestamp with time zone
+);
+
+
+ALTER TABLE public."ImpiegatiRitiroBici" OWNER TO postgres;
+
+--
+-- TOC entry 207 (class 1259 OID 16905)
+-- Name: Noleggio; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Noleggio" (
+    utente character varying NOT NULL,
+    bici integer NOT NULL,
+    inizio timestamp with time zone NOT NULL,
+    fine timestamp with time zone,
+    multa boolean,
+    totem integer NOT NULL
+);
+
+
+ALTER TABLE public."Noleggio" OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 16836)
+-- Name: Totem; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Totem" (
+    "Id" integer NOT NULL,
+    "Via" character varying NOT NULL
+);
+
+
+ALTER TABLE public."Totem" OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1259 OID 16842)
+-- Name: Università; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Università" (
+    "Email" character varying NOT NULL,
+    "Matricola" character varying NOT NULL,
+    "Università" character varying NOT NULL,
+    "Corso" character varying NOT NULL,
+    "Abbonamento" character varying NOT NULL
+);
+
+
+ALTER TABLE public."Università" OWNER TO postgres;
+
+--
+-- TOC entry 206 (class 1259 OID 16848)
+-- Name: Utenti; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Utenti" (
+    "CodiceUnivoco" character varying NOT NULL,
+    "Password" character varying NOT NULL,
+    "Nome" character varying NOT NULL,
+    "numeroCarta" character varying NOT NULL,
+    "validitàCarta" date NOT NULL
+);
+
+
+ALTER TABLE public."Utenti" OWNER TO postgres;
+
+--
+-- TOC entry 3038 (class 0 OID 16806)
+-- Dependencies: 200
+-- Data for Name: Abbonamento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Abbonamento" ("CodiceUnivoco", tipo, inizio, fine, studente, "ConsegnaTardiva") FROM stdin;
+4713458144	Annuale	2021-03-02	2022-03-02	f	\N
+4713458205	Giornaliero	\N	\N	f	\N
+4713458218	Settimanale	\N	\N	f	\N
+4714186072	Annuale	2021-03-02	2022-03-02	f	\N
+4876230702	Annuale	2021-03-04	2022-03-04	t	\N
+5138696673	Settimanale	\N	\N	f	\N
+5138738673	Settimanale	\N	\N	t	\N
+5139069579	Giornaliero	\N	\N	t	\N
+\.
+
+
+--
+-- TOC entry 3039 (class 0 OID 16812)
+-- Dependencies: 201
+-- Data for Name: Biciclette; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Biciclette" ("Id", tipo, danno, totem, seggiolino) FROM stdin;
+6	elettrica	f	2	\N
+4	normale	t	2	\N
+5	normale	f	2	\N
+1	normale	f	1	\N
+2	normale	f	1	\N
+9	elettrica	f	2	t
+7	elettrica	f	2	t
+8	normale	f	2	f
+\.
+
+
+--
+-- TOC entry 3040 (class 0 OID 16818)
+-- Dependencies: 202
+-- Data for Name: Impiegati; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Impiegati" ("Nome", "CodiceImpiegato", "Password") FROM stdin;
+Jhonny	1	prova
+\.
+
+
+--
+-- TOC entry 3041 (class 0 OID 16824)
+-- Dependencies: 203
+-- Data for Name: ImpiegatiRitiroBici; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."ImpiegatiRitiroBici" (impiegato, bici, inizio, fine) FROM stdin;
+1	2	2021-03-09 12:34:47.194102+01	2021-03-09 12:35:47.383935+01
+1	5	2021-03-09 12:35:12.538222+01	2021-03-09 12:36:06.637054+01
+1	1	2021-03-09 12:41:24.024466+01	2021-03-09 12:41:48.478234+01
+1	8	2021-03-03 02:39:43.074741+01	2021-03-03 02:39:52.480337+01
+1	7	2021-03-04 01:14:16.149289+01	2021-03-04 01:14:24.376337+01
+1	6	2021-03-04 01:14:10.750032+01	2021-03-04 01:14:31.925208+01
+1	6	2021-03-04 01:17:22.591699+01	2021-03-04 01:17:33.272433+01
+1	6	2021-03-04 01:18:39.709832+01	2021-03-04 01:18:50.663434+01
+1	8	2021-03-04 01:43:04.206339+01	2021-03-04 01:43:21.482906+01
+1	6	2021-03-04 01:43:08.141575+01	2021-03-04 01:43:24.879726+01
+1	6	2021-03-04 17:29:43.175039+01	2021-03-04 17:31:03.80283+01
+1	6	2021-03-04 17:33:33.316931+01	2021-03-04 17:34:02.447701+01
+1	1	2021-03-04 18:22:34.900365+01	2021-03-04 18:22:34.902809+01
+\.
+
+
+--
+-- TOC entry 3045 (class 0 OID 16905)
+-- Dependencies: 207
+-- Data for Name: Noleggio; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Noleggio" (utente, bici, inizio, fine, multa, totem) FROM stdin;
+4714186072	6	2021-03-04 17:22:31.527+01	2021-03-04 17:23:55.574783+01	f	2
+4714186072	5	2021-03-04 17:29:15.86+01	2021-03-04 17:31:07.077657+01	f	2
+4714186072	8	2021-03-02 20:43:38.516+01	2021-03-02 20:43:50.750629+01	f	2
+4714186072	5	2021-03-04 01:44:45.577+01	2021-03-04 01:44:58.810677+01	f	2
+4714186072	1	2021-03-04 18:22:34.879+01	2021-03-04 18:22:34.89604+01	f	2
+4714186072	1	2021-03-04 18:22:41.57+01	2021-03-04 18:24:38.02763+01	f	2
+4714186072	4	2021-03-04 18:24:44.637+01	2021-03-04 18:24:44.649819+01	f	2
+4714186072	6	2021-03-04 18:24:44.651+01	2021-03-04 18:24:44.657444+01	f	2
+4714186072	4	2021-03-04 18:24:44.658+01	2021-03-04 18:24:44.663777+01	f	2
+4714186072	1	2021-03-04 18:24:44.743+01	2021-03-04 18:25:08.680091+01	f	2
+4714186072	2	2021-03-09 12:43:53.128+01	2021-03-09 12:44:20.998451+01	f	1
+\.
+
+
+--
+-- TOC entry 3042 (class 0 OID 16836)
+-- Dependencies: 204
+-- Data for Name: Totem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Totem" ("Id", "Via") FROM stdin;
+1	via Verdi
+2	via Bianchi
+\.
+
+
+--
+-- TOC entry 3043 (class 0 OID 16842)
+-- Dependencies: 205
+-- Data for Name: Università; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Università" ("Email", "Matricola", "Università", "Corso", "Abbonamento") FROM stdin;
+ciao@ciao	9999	mialno	crittografia	4713458144
+adsda@saads	2131212	statale milano	informatica	4876230702
+\.
+
+
+--
+-- TOC entry 3044 (class 0 OID 16848)
+-- Dependencies: 206
+-- Data for Name: Utenti; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Utenti" ("CodiceUnivoco", "Password", "Nome", "numeroCarta", "validitàCarta") FROM stdin;
+4713458144	1	jack	43458451434	2022-03-27
+4713458205	1	jackyp	491239833	2022-03-27
+4713458218	1	jacky	49123983	2022-03-27
+4714186072	1	Prova	2132311231232	2024-03-08
+4876230702	mex	tex	13456678	2023-03-10
+5138696673	1	Federico	1239301	2024-03-16
+5138738673	1	FedericoStudente	123930121321	2024-03-16
+5139069579	22	ahmed	100	2023-06-10
+\.
+
+
+--
+-- TOC entry 2885 (class 2606 OID 16855)
+-- Name: Abbonamento Abbonamento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Abbonamento"
+    ADD CONSTRAINT "Abbonamento_pkey" PRIMARY KEY ("CodiceUnivoco");
+
+
+--
+-- TOC entry 2887 (class 2606 OID 16857)
+-- Name: Biciclette Biciclette_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Biciclette"
+    ADD CONSTRAINT "Biciclette_pkey" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 2891 (class 2606 OID 16859)
+-- Name: ImpiegatiRitiroBici ImpiegatiRitiroBici_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ImpiegatiRitiroBici"
+    ADD CONSTRAINT "ImpiegatiRitiroBici_pkey" PRIMARY KEY (impiegato, bici, inizio);
+
+
+--
+-- TOC entry 2889 (class 2606 OID 16861)
+-- Name: Impiegati Impiegati_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Impiegati"
+    ADD CONSTRAINT "Impiegati_pkey" PRIMARY KEY ("CodiceImpiegato");
+
+
+--
+-- TOC entry 2899 (class 2606 OID 16929)
+-- Name: Noleggio Noleggio_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Noleggio"
+    ADD CONSTRAINT "Noleggio_pkey" PRIMARY KEY (utente, bici, inizio);
+
+
+--
+-- TOC entry 2893 (class 2606 OID 16865)
+-- Name: Totem Totem_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Totem"
+    ADD CONSTRAINT "Totem_pkey" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 2895 (class 2606 OID 16867)
+-- Name: Università Università_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Università"
+    ADD CONSTRAINT "Università_pkey" PRIMARY KEY ("Email");
+
+
+--
+-- TOC entry 2897 (class 2606 OID 16869)
+-- Name: Utenti Utenti_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Utenti"
+    ADD CONSTRAINT "Utenti_pkey" PRIMARY KEY ("Nome");
+
+
+--
+-- TOC entry 2901 (class 2606 OID 16870)
+-- Name: ImpiegatiRitiroBici ImpiegatiRitiroBici_bici_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ImpiegatiRitiroBici"
+    ADD CONSTRAINT "ImpiegatiRitiroBici_bici_fkey" FOREIGN KEY (bici) REFERENCES public."Biciclette"("Id") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
+
+
+--
+-- TOC entry 2902 (class 2606 OID 16875)
+-- Name: ImpiegatiRitiroBici ImpiegatiRitiroBici_impiegato_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."ImpiegatiRitiroBici"
+    ADD CONSTRAINT "ImpiegatiRitiroBici_impiegato_fkey" FOREIGN KEY (impiegato) REFERENCES public."Impiegati"("CodiceImpiegato") NOT VALID;
+
+
+--
+-- TOC entry 2906 (class 2606 OID 16918)
+-- Name: Noleggio Noleggio_bici_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Noleggio"
+    ADD CONSTRAINT "Noleggio_bici_fkey" FOREIGN KEY (bici) REFERENCES public."Biciclette"("Id");
+
+
+--
+-- TOC entry 2907 (class 2606 OID 16923)
+-- Name: Noleggio Noleggio_totem_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Noleggio"
+    ADD CONSTRAINT "Noleggio_totem_fkey" FOREIGN KEY (totem) REFERENCES public."Totem"("Id");
+
+
+--
+-- TOC entry 2905 (class 2606 OID 16913)
+-- Name: Noleggio Noleggio_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Noleggio"
+    ADD CONSTRAINT "Noleggio_utente_fkey" FOREIGN KEY (utente) REFERENCES public."Abbonamento"("CodiceUnivoco");
+
+
+--
+-- TOC entry 2903 (class 2606 OID 16890)
+-- Name: Università Università_Abbonamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Università"
+    ADD CONSTRAINT "Università_Abbonamento_fkey" FOREIGN KEY ("Abbonamento") REFERENCES public."Abbonamento"("CodiceUnivoco") NOT VALID;
+
+
+--
+-- TOC entry 2904 (class 2606 OID 16895)
+-- Name: Utenti Utenti_CodiceUnivoco_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Utenti"
+    ADD CONSTRAINT "Utenti_CodiceUnivoco_fkey" FOREIGN KEY ("CodiceUnivoco") REFERENCES public."Abbonamento"("CodiceUnivoco");
+
+
+--
+-- TOC entry 2900 (class 2606 OID 16900)
+-- Name: Biciclette biciToTotem; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Biciclette"
+    ADD CONSTRAINT "biciToTotem" FOREIGN KEY (totem) REFERENCES public."Totem"("Id");
+
+
+-- Completed on 2021-03-09 17:45:34
+
+--
+-- PostgreSQL database dump complete
+--
+
